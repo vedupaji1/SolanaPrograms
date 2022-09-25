@@ -11,8 +11,7 @@ pub const MESSAGE:&[u8]=b"message";
 #[program]
 pub mod your_message {
     use super::*;
-
-   
+ 
     /*
     This Method Is Used To Create New User Account.  
     @Note:- User Can Create Only One Account From Their Address.
@@ -81,10 +80,13 @@ pub struct Message {
     message:String,
 }
 
-
 impl Message{
+    // It Will Return Space Required For Message Account We Can Also Just Put Space Value Or Calculate Inside "account" Macro, We has Just Created This Method For Increasing Readability.
     fn get_message_size(message:&str) -> usize {
        8 + 32 + 4 + message.len()
+       // Account Discriminator = 8 Bytes, Public Key = 32 Bytes And Note That With Every Dynamic Size Data Type Like String And Vector We Have To Add 4.
+       // Here We Have One String Type In Struct "Message" Named "message" So We Are Adding Only 4 One Time, If We Have Two String Type And One Vector Type So We Have To Add 4 Three Times For Each.
+       // Note That Adding 4 Is Required When We Are Allocating Account Size Same As Data Size Like If Data Size Is 50 Bytes So We Are Allocating Same Size.
     }
 }
 
